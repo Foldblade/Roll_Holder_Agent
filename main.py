@@ -28,7 +28,7 @@ while True:
         left_length = ultrasonic.measure()
         print(left_length)
         # 手在，出纸
-        stepper.backwards(3 / 1000.0, 150)
+        stepper.forward(3 / 1000.0, 50)
         lock = True
     if  GPIO.input(infrared_channel) == 0 :
         lock = False

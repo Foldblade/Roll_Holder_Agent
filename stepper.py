@@ -7,7 +7,8 @@ coil_A_1_pin = 25
 coil_A_2_pin = 24
 coil_B_1_pin = 7
 coil_B_2_pin = 8
- 
+# 在这里修改电机的四个脚
+
 GPIO.setup(coil_A_1_pin, GPIO.OUT)
 GPIO.setup(coil_A_2_pin, GPIO.OUT)
 GPIO.setup(coil_B_1_pin, GPIO.OUT)
