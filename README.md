@@ -94,7 +94,13 @@ coil_B_2_pin = 8
 ……
 ```
 
+`main.py`
 
+```
+# 算法
+angle = 35 / (10.1 - left_length) # 角度
+turns = angle / 3.18 # 圈数
+```
 
 ## 鸣谢
 

@@ -27,8 +27,11 @@ while True:
     if GPIO.input(infrared_channel) == 1 and lock == False:
         left_length = ultrasonic.measure()
         print(left_length)
+        # 算法
+        angle = 35 / (10.1 - left_length) # 角度
+        turns = angle / 3.18 # 圈数
         # 手在，出纸
-        stepper.forward(3 / 1000.0, 50)
+        stepper.forward(3 / 1000.0, turns * 50)
         lock = True
     if  GPIO.input(infrared_channel) == 0 :
         lock = False
