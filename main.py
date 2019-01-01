@@ -8,10 +8,14 @@ import time
 import ultrasonic
 import stepper
 
+time.sleep(30) # 开机后保险起见，等待30s
+
 infrared_channel = 22
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(infrared_channel, GPIO.IN)
+
+time.sleep(30) # 开机后保险起见，等待30s
 
 count = 0
 lock = False
