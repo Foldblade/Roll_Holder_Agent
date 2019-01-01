@@ -22,4 +22,5 @@ def get():
 
 
 if __name__ == '__main__': # 测试
+    print(get())
     GPIO.cleanup()

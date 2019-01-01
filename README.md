@@ -29,7 +29,7 @@
 ### 基础配置
 
 1. git clone
-2. cd
+2. cd Roll_Holder_Agent
 3. `cp .sql_config(origin).json .sqlconfig.json`
 4. `cp .config(origin).json .config.json`
 5. `nano .sqlconfig.json`或者`vi .sqlconfig.json`，修改你的数据库信息
@@ -60,7 +60,7 @@ sudo python3 setup.py install
 
 在正确地配置、连接各种元件后，运行`main.py`，这将监听红外传感器、驱动电机出纸。运行`log.py`，将会把数据上传到数据库。
 
-**请注意**：无论是`main.py`还是`log.py`，**开始前有一分钟的延迟等待时间**。
+**请注意**：`main.py`**开始前有30秒的延迟等待时间**。
 
 
 

@@ -2,10 +2,10 @@
     "location": "教学楼",
     "number": 1,
     "GPIO": {
-        "infrared": 0,
-        "humiture": 0,
-        "airQuality": 0,
-        "ultrasonic_TRIGGER": 0,
-        "ultrasonic_ECHO": 0
+        "infrared": 22,
+        "humiture": 4,
+        "airQuality": 27,
+        "ultrasonic_TRIGGER": 15,
+        "ultrasonic_ECHO": 14
     }
 }
