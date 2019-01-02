@@ -22,14 +22,18 @@
 
 ### 环境
 
-
+- Raspbian Stretch Lite
+  Version: November 2018
+  Release date: 2018-11-13
+  Kernel version: 4.14
+- Python 3.5.3
 
 ## 使用方法
 
 ### 基础配置
 
 1. git clone
-2. cd Roll_Holder_Agent
+2. `cd Roll_Holder_Agent`
 3. `cp .sql_config(origin).json .sqlconfig.json`
 4. `cp .config(origin).json .config.json`
 5. `nano .sqlconfig.json`或者`vi .sqlconfig.json`，修改你的数据库信息
@@ -54,13 +58,14 @@ cd Adafruit_Python_DHT
 安装到Python3：
 
 ```
-sudo python setup.py install
 sudo python3 setup.py install
 ```
 
 在正确地配置、连接各种元件后，运行`main.py`，这将监听红外传感器、驱动电机出纸。运行`log.py`，将会把数据上传到数据库。
 
 **请注意**：`main.py`**开始前有30秒的延迟等待时间**。
+
+建议结合开机启动与后台运行。
 
 
 
@@ -97,16 +102,16 @@ coil_B_2_pin = 8
 `main.py`
 
 ```
-# 算法
+# 出纸的算法
 angle = 35 / (10.1 - left_length) # 角度
 turns = angle / 3.18 # 圈数
 ```
 
 ## 鸣谢
 
-### 引用代码
+### 引用/修改后使用的代码
 
-请移步`/quote`目录。
+源代码请移步`/quote`目录。
 
 - stepper.py：
   取自《树莓派开发实战》(Raspberry Pi Cookbook)
@@ -118,4 +123,8 @@ turns = angle / 3.18 # 圈数
 ### 参考资料
 
 [DHT11传感器读取数据 —— 使用Adafruit_Python_DHT](https://www.raspberrypi-spy.co.uk/2017/09/dht11-temperature-and-humidity-sensor-raspberry-pi/ )
+
+[树莓派程序开机自启动方法总结](https://www.jianshu.com/p/86adb6d5347b )
+
+[Linux 使用nohup……&后台运行](https://blog.csdn.net/xinluke/article/details/52493734#t6)
 
