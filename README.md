@@ -87,6 +87,17 @@ sudo python3 setup.py install
 }
 ```
 
+`.sqlconfig.json`
+
+```
+{
+    "host": "", // 主机
+    "user": "", // 用户名
+    "password": "", // 密码
+    "database": "" //数据库
+}
+```
+
 `stepper.py`
 
 ```
