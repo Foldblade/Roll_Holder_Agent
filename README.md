@@ -1,5 +1,7 @@
 # Roll_Holder_Agent（纸盒特工）
 
+[TOC]
+
 “纸盒特工”是我们为节能减排竞赛所做的小制作。升级自学长的毕业设计，原名智能纸盒，为竞赛改名“纸盒特工”。
 
 ## 主要功能：
@@ -36,8 +38,8 @@
 2. `cd Roll_Holder_Agent`
 3. `cp .sql_config(origin).json .sqlconfig.json`
 4. `cp .config(origin).json .config.json`
-5. `nano .sqlconfig.json`或者`vi .sqlconfig.json`，修改你的数据库信息
-6. `nano .config.json`或者`vi .config.json`，修改/查看GPIO引脚使用
+5. `nano .sqlconfig.json`或者`vi .sqlconfig.json`，修改你的数据库信息（见后）
+6. `nano .config.json`或者`vi .config.json`，修改/查看GPIO引脚使用（见后）
 
 ### 环境配置
 
@@ -61,13 +63,26 @@ cd Adafruit_Python_DHT
 sudo python3 setup.py install
 ```
 
+#### SQL
+
+`shuju`表
+
+```
+temperature|humidness|thickness|smelly|location|number|datetime
+```
+
+`log`表
+
+```
+temperature|humidness|thickness|smelly|location|number|datetime|logid
+```
+### 使用
+
 在正确地配置、连接各种元件后，运行`main.py`，这将监听红外传感器、驱动电机出纸。运行`log.py`，将会把数据上传到数据库。
 
-**请注意**：`main.py`**开始前有30秒的延迟等待时间**。
+`main.py`**开始前有合计6秒的延迟等待时间**。
 
 建议结合开机启动与后台运行。
-
-
 
 ## 配置说明
 
@@ -75,8 +90,8 @@ sudo python3 setup.py install
 
 ```
 {
-    "location": "教学楼", // 所在地
-    "number": 1, // 编号or卫生间门牌号
+    "location": "教学楼一#101", // 所在地#卫生间门牌号
+    "number": 1, // 编号（唯一）
     "GPIO": { // GPIO引脚使用
         "infrared": 22, // 红外
         "humiture": 17, // 温湿度（DHT11）
