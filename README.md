@@ -31,6 +31,7 @@
   Release date: 2018-11-13
   Kernel version: 4.14
 - Python 3.5.3
+- PHP 5+
 
 ## 使用方法
 
@@ -86,6 +87,8 @@ temperature|humidness|thickness|smelly|location|number|datetime|logid
 
 建议结合开机启动与后台运行。
 
+`/web`目录内为一PHP在线数据监控网页。
+
 ## 配置说明
 
 `.config.json`
@@ -135,6 +138,17 @@ coil_B_2_pin = 8
 # 出纸的算法
 angle = 35 / (10.1 - left_length) # 角度
 turns = angle / 3.18 # 圈数
+```
+
+`/web/.sql_config.json`
+
+```
+{
+    "host": "", // 主机
+    "user": "", // 用户名
+    "password": "", // 密码
+    "database": "" //数据库
+}
 ```
 
 ## 鸣谢
