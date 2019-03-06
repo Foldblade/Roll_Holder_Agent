@@ -9,6 +9,7 @@
 - 伸手自动出定量纸，以达到节能减排之目的
 - 检测厕纸剩余量，并在接近不足时通过APP通知管理人员更换
 - 检测厕所空气质量并及时报警
+- 烘手机
 
 ## 所用配件与环境：
 
@@ -21,6 +22,7 @@
     - 温湿度（DHT11）
     - 超声波
 - 步进电机
+- 电热丝、直流电机
 
 ### 环境
 
@@ -78,7 +80,7 @@ temperature|humidness|thickness|smelly|location|number|datetime|logid
 ```
 ### 使用
 
-在正确地配置、连接各种元件后，运行`main.py`，这将监听红外传感器、驱动电机出纸。运行`log.py`，将会把数据上传到数据库。
+在正确地配置、连接各种元件后，运行`main.py`，这将监听红外传感器、驱动电机出纸。运行`log.py`，将会把数据上传到数据库。运行`dryer.py`，将会监听按钮，按下按钮后便会给电热丝通电、鼓风。
 
 `main.py`**开始前有合计6秒的延迟等待时间**。
 
@@ -97,7 +99,9 @@ temperature|humidness|thickness|smelly|location|number|datetime|logid
         "humiture": 17, // 温湿度（DHT11）
         "airQuality": 27, // 空气质量（MQ-135）DO口
         "ultrasonic_TRIGGER": 15, // 超声波Trigger口
-        "ultrasonic_ECHO": 14 // 超声波Echo口
+        "ultrasonic_ECHO": 14, // 超声波Echo口
+        "button": 19, // 烘干机的按钮
+        "heating": 26 // 烘干机的电热丝&（直流电机）风机
     }
 }
 ```

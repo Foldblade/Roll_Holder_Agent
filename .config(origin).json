@@ -6,6 +6,8 @@
         "humiture": 4,
         "airQuality": 27,
         "ultrasonic_TRIGGER": 15,
-        "ultrasonic_ECHO": 14
+        "ultrasonic_ECHO": 14,
+        "button": 19,
+        "heating": 26
     }
 }
