@@ -2,6 +2,8 @@
 .*.json
 !.sql_config(origin).json
 !.config(origin).json
+3b/
+#3b is a directory we tried on raspberry 3b+, only for test
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

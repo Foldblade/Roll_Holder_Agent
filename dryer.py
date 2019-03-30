@@ -27,7 +27,7 @@ while True:
     if input_state == False:
         print("Button  Pressed")
         GPIO.output(heating_channel, True) # 吹风
-        time.sleep(5)
+        time.sleep(0.1)
         GPIO.output(heating_channel, False) # 停止吹风
     else: 
         print("NOT pressed")
