@@ -32,11 +32,7 @@ def data_upload(temperature, humidness, thickness, smelly, location, number):
             data_upload(18, 55, 8.6, 1, '主五#320', 1)
         
     '''
-    temperature = str(temperature)
-    humidness = str(humidness)
-    thickness = str(thickness)
-    smelly = str(smelly)
-    number = str(number)
+     
     # 打开数据库连接
     db = pymysql.connect(sqljson["host"], sqljson["user"], sqljson["password"], sqljson["database"] )
     
@@ -230,6 +226,7 @@ def paperChange(location, number):
         # 注意下一行有写死了是useage表
         sql = "INSERT `useage`(date, paperChangeTimes, location, number) \
         VALUES ('" + nowdate + "', " + "1" + ", '" + location + "', " + number + ")"
+        # e.g. INSERT `useage` (date, paperChangeTimes, location, number) VALUES ('2019-03-25', 0, '主五#320', 1)
         try:
             # 执行sql语句
             cursor.execute(sql)

@@ -7,7 +7,8 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
         <!-- font-awesome -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-        
+        <!-- ECharts -->
+        <script src="https://cdn.bootcss.com/echarts/4.2.1/echarts.min.js"></script>
         <!--Let browser know website is optimized for mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
@@ -17,6 +18,18 @@
     <body>
         <nav>
             <div class="nav-wrapper">
-                <a href="#" class="brand-logo center">纸盒特工</a>
+                <a href="/" class="brand-logo center">纸盒特工</a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="detail.php">状况</a></li>
+                    <li><a href="">统计</a></li>
+                    <li><a href="center.php">个人中心</a></li>
+                </ul>
             </div>
         </nav>
+        
+        <ul class="sidenav" id="mobile-demo">
+            <li><a href="detail.php">状况</a></li>
+            <li><a href="">统计</a></li>
+            <li><a href="center.php">个人中心</a></li>
+        </ul>
