@@ -68,7 +68,7 @@
     
     <div class="fixed-action-btn">
         <a class="btn-floating btn-large red">
-            <i class="large material-icons">more_horiz</i>
+            <i class="large material-icons">menu</i>
         </a>
         <ul>
             <li><a class="btn-floating red" onClick="javascript :history.back(-1);"><i class="material-icons">arrow_back</i></a></li>
@@ -213,31 +213,31 @@ EOF;
                     </div>
                 </div>
 EOF;
-                // 图表预留位
-                echo <<< EOF
-                <div class="row">
-                    <div class="col s12 m8 offset-m2">
-                        <div class="card white">
-                            <div id="chart_temperature_humidness" style="width: 600px;height:600px;"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s12 m8 offset-m2">
-                        <div class="card white">
-                            <div id="chart_paper_useage" style="width: 600px;height:300px;"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s12 m8 offset-m2">
-                        <div class="card white">
-                            <div id="chart_paper_useage_hot" style="width: 600px;height:250px;"></div>
-                        </div>
-                    </div>
-                </div>
-EOF;
             }
+            // 图表预留位
+            echo <<< EOF
+            <div class="row">
+                <div class="col s12 m8 offset-m2">
+                    <div class="card white">
+                        <div id="chart_temperature_humidness" style="width: 600px;height:600px;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 m8 offset-m2">
+                    <div class="card white">
+                        <div id="chart_paper_useage" style="width: 600px;height:300px;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 m8 offset-m2">
+                    <div class="card white">
+                        <div id="chart_paper_useage_hot" style="width: 600px;height:250px;"></div>
+                    </div>
+                </div>
+            </div>
+EOF;
         }
     ?>
                 
