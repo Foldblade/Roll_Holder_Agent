@@ -102,7 +102,7 @@
                 }
                 if ($data["smelly"] == 0) { // $data["smelly"]为空气质量，1为好，0为不好
                     $AQ = '<span class="red-text">空气质量糟糕</span>';
-                    $AQ_bad_str = $AQ_bad_str.$location-$number.' ';
+                    $AQ_bad_str = $AQ_bad_str.$location."-".$number.' ';
                 } else {
                     $AQ = "空气质量尚可";
                 }
@@ -127,7 +127,7 @@ EOF;
             if ($left_less_str != "" or $AQ_bad_str != "") {
                 if ($left_less_str != "" and $AQ_bad_str != "") {
                     $alert_text = '<span class="red-text">'.$left_less_str.'</span><b>纸张余量不足</b>，<br />
-                                   <span class="red-text">'.$AQ_bad_str.'</span><b>空气质量不佳</b>!<br />';
+                                   <span class="red-text">'.$AQ_bad_str.'</span><b>空气质量不佳</b>！<br />';
                 } else {
                     if ($left_less_str != "") {
                         $alert_text = '<span class="red-text">'.$left_less_str.'</span><b>纸张余量不足</b>！';
