@@ -29,5 +29,5 @@ def buttonListener(name): # 按钮监听
         time.sleep(0.2)
 
 if __name__ == "__main__":
-    time.sleep(3)
+    time.sleep(2)
     buttonListener('BUTTONLISTENER')

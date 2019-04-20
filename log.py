@@ -24,7 +24,7 @@ def noPaperAlert() :
     except Exception as e:
         print(e, 'Someting went wrong.')
 
-if __name__ == "__main__":
+def log(name) :
     thickness_previous = -1
     while True:
         time.sleep(60)
@@ -48,3 +48,6 @@ if __name__ == "__main__":
             print('Upload log success!')
         except Exception as e:
             print(e, 'Someting went wrong.')
+    
+if __name__ == "__main__":
+    log('LOG')

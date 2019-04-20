@@ -25,18 +25,23 @@ GPIO.setup(relay_channel, GPIO.OUT)
 若红外对射输入为0/False，则有人
 若红外对射输入为1/True，则没人
 '''
-while True:
-    input_state = GPIO.input(infrared2_channel)
-    if input_state == False:
-        print("红外对射有人-False")
-        GPIO.output(relay_channel, True)
-        print("继电器置True")
-        print("time sleep 0.5")
-        time.sleep(0.5)
-        GPIO.output(relay_channel, False)
-        print("继电器置False")
-    else:
-        print("红外对射没人-True")
-        GPIO.output(relay_channel, False)
-        print("继电器置False")
-    time.sleep(1)
+def dryer(name):
+    while True:
+        input_state = GPIO.input(infrared2_channel)
+        if input_state == False:
+            print("红外对射有人-False")
+            GPIO.output(relay_channel, True)
+            print("继电器置True")
+            print("time sleep 0.3")
+            time.sleep(0.3)
+            GPIO.output(relay_channel, False)
+            print("继电器置False")
+        else:
+            print("红外对射没人-True")
+            GPIO.output(relay_channel, False)
+            print("继电器置False")
+        time.sleep(1)
+
+if __name__ == "__main__":
+    time.sleep(10)
+    dryer('DRYER')

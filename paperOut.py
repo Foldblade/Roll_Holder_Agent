@@ -41,8 +41,6 @@ def paperOut(name):
             print("没人")
             time.sleep(0.2)
     
-
-
 '''
     # 原来的红外传感器方案
     lock = False
