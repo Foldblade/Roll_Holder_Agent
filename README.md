@@ -4,6 +4,8 @@
 
 “纸盒特工”是我们为节能减排竞赛所做的小制作。升级自学长的毕业设计，原名智能纸盒，为竞赛改名“纸盒特工”。
 
+[![996.ICU](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu) [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
+
 ## 主要功能：
 
 - 伸手自动出定量纸，以达到节能减排之目的

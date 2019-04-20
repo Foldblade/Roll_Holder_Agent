@@ -26,19 +26,21 @@ def paperOut(name):
     # 单纯的红外对射出纸方案
     while True:
         if GPIO.input(infrared_channel) == False: # 有人
-            print("有人")
+            print("[出纸]\t红外对射有人-False")
             left_length = ultrasonic.measure()
             print(left_length)
+            if left_length >= 10.1:
+                left_length == 9
             # 算法
             angle = 35 / (10.1 - left_length) # 角度
             turns = angle / 3.18 # 圈数
             # 手在，出纸
             stepper.forward(3 / 1000.0, int(turns * 50))
-            print("开始5秒冷却")
+            print("[出纸]\t开始5秒冷却")
             time.sleep(5)
-            print("5秒冷却结束")
+            print("[出纸]\t5秒冷却结束")
         else:
-            print("没人")
+            print("[出纸]\t红外对射没人-True")
             time.sleep(0.2)
     
 '''
