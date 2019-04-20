@@ -10,25 +10,43 @@ import stepper
 
 time.sleep(3) # 开机后保险起见，等待3s
 
-infrared_channel = 22
+where_script = os.path.split(os.path.realpath(__file__))[0]
+f = open(where_script + '/.config.json', 'r') # 在此文件内修改你的GPIO配置
+configjson = json.load(f)
+f.close()
+
+infrared_channel = configjson["GPIO"]["infrared"]
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(infrared_channel, GPIO.IN)
 
 time.sleep(3) # 开机后保险起见，等待3s
 
-# count = 0
-lock = False
+def paperOut(name):
+    # 单纯的红外对射出纸方案
+    while True:
+        if GPIO.input(infrared_channel) == False: # 有人
+            print("有人")
+            left_length = ultrasonic.measure()
+            print(left_length)
+            # 算法
+            angle = 35 / (10.1 - left_length) # 角度
+            turns = angle / 3.18 # 圈数
+            # 手在，出纸
+            stepper.forward(3 / 1000.0, int(turns * 50))
+            print("开始5秒冷却")
+            time.sleep(5)
+            print("5秒冷却结束")
+        else:
+            print("没人")
+            time.sleep(0.2)
+    
+
+
+'''
+    # 原来的红外传感器方案
+    lock = False
 while True:
-    '''
-    if GPIO.input(infrared_channel) == 1 and lock == True:
-        count = count + 1
-        print("计数：\t", count)
-        print("秒：\t", count * 2)
-        print("")
-    else :
-        count = 0
-    '''
     print("人：\t", GPIO.input(infrared_channel))
     print("Lock：\t", lock)
     if GPIO.input(infrared_channel) == 1 and lock == False:
@@ -47,5 +65,7 @@ while True:
     if GPIO.input(infrared_channel) == 0 and lock == True:
         lock = False
     time.sleep(0.5)
+'''
 
-GPIO.cleanup()
+if __name__ == "__main__":
+    paperOut('PAPEROUT')

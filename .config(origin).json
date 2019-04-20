@@ -1,6 +1,6 @@
 {
     "location": "教学楼一#101",
-    "number": 1,
+    "number": 0,
     "GPIO": {
         "infrared": 22,
         "humiture": 4,
@@ -8,6 +8,7 @@
         "ultrasonic_TRIGGER": 15,
         "ultrasonic_ECHO": 14,
         "button": 19,
-        "heating": 26
+        "infrared2": 16,
+        "relay": 20
     }
 }

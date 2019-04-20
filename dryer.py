@@ -6,29 +6,37 @@ import os
 import json
 import time
 
-time.sleep(1.5)
+# 继电器带着烘干机。原heating端口废弃。
 
 where_script = os.path.split(os.path.realpath(__file__))[0]
 f = open(where_script + '/.config.json', 'r') # 在此文件内修改你的GPIO配置
 configjson = json.load(f)
 f.close()
 
-button_channel = configjson["GPIO"]["button"]
-heating_channel = configjson["GPIO"]["heating"]
+infrared2_channel = configjson["GPIO"]["infrared2"]
+relay_channel = configjson["GPIO"]["relay"]
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(button_channel, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(heating_channel, GPIO.OUT)
+GPIO.setup(infrared2_channel, GPIO.IN)
+GPIO.setup(relay_channel, GPIO.OUT)
 
-GPIO.output(heating_channel, False) # 默认停止吹风
 
+'''
+若红外对射输入为0/False，则有人
+若红外对射输入为1/True，则没人
+'''
 while True:
-    input_state = GPIO.input(button_channel)
+    input_state = GPIO.input(infrared2_channel)
     if input_state == False:
-        print("Button  Pressed")
-        GPIO.output(heating_channel, True) # 吹风
-        time.sleep(0.1)
-        GPIO.output(heating_channel, False) # 停止吹风
-    else: 
-        print("NOT pressed")
-    time.sleep(0.2)
+        print("红外对射有人-False")
+        GPIO.output(relay_channel, True)
+        print("继电器置True")
+        print("time sleep 0.5")
+        time.sleep(0.5)
+        GPIO.output(relay_channel, False)
+        print("继电器置False")
+    else:
+        print("红外对射没人-True")
+        GPIO.output(relay_channel, False)
+        print("继电器置False")
+    time.sleep(1)
