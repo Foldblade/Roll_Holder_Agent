@@ -69,6 +69,8 @@ def measure():
     return distance
 
 if __name__ == '__main__': # 测试
-    print("Distance : ", measure())
+    while True:
+        print("Distance : ", measure())
+        time.sleep(0.1)
     # Reset GPIO settings
     GPIO.cleanup()

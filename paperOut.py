@@ -27,10 +27,13 @@ def paperOut(name):
     while True:
         if GPIO.input(infrared_channel) == False: # 有人
             print("[出纸]\t红外对射有人-False")
-            left_length = ultrasonic.measure()
+            try:    
+                left_length = ultrasonic.measure() # 超声波读取长度
+            except:
+                left_length = 7.8 # 若读取失败
+            if left_length >= 10.1: # 若没装纸/异常少
+                left_length = 9
             print(left_length)
-            if left_length >= 10.1:
-                left_length == 9
             # 算法
             angle = 35 / (10.1 - left_length) # 角度
             turns = angle / 3.18 # 圈数
