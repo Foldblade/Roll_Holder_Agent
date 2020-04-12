@@ -14,12 +14,13 @@ f = open(where_script + '/.config.json', 'r') # 在此文件内修改你的GPIO�
 configjson = json.load(f)
 f.close()
 
+#time.sleep(20) # 开机后保险起见，等待20s
+
 def noPaperAlert() :
     AQ = airQuality.get()
-    humiture_dict = temp_new.get()
     thickness = 8.5 # 手动给一个缺纸量，达到报警效果
     try:
-        mysql.data_upload(humiture_dict['temperature'], humiture_dict['humidity'], thickness, AQ, configjson["location"], configjson["number"])
+        mysql.data_upload(thickness, AQ, configjson["location"], configjson["number"])
         print('Upload log success!')
     except Exception as e:
         print(e, 'Someting went wrong.')
@@ -32,8 +33,18 @@ def log(name) :
         # print('H/T:\t', temp_new.get()) # 测试，湿度&温度
 
         AQ = airQuality.get()
-        humiture_dict = temp_new.get()
-        thickness = ultrasonic.measure()
+        print("AQ", AQ)
+        # humiture_dict = temp_new.get()
+        # print("humiture", humiture_dict)
+        # temperature = humiture_dict['temperature']
+        # humidity = humiture_dict['humidity']
+        f = open(where_script + '/.length.json', 'r')
+        lengthjson = json.load(f)
+        f.close()
+        length_log = lengthjson["length"]
+        print(length_log[-1])
+        thickness = length_log[-1]
+        print("thickness", thickness)
         if thickness_previous == -1:
             thickness_previous = thickness  # 首次运行，存储厚度数据
         else : 
@@ -44,7 +55,8 @@ def log(name) :
                 except Exception as e:
                     print(e, 'Someting went wrong.')
         try:
-            mysql.data_upload(humiture_dict['temperature'], humiture_dict['humidity'], thickness, AQ, configjson["location"], configjson["number"])
+            print(thickness, AQ, configjson["location"], configjson["number"])
+            mysql.data_upload(thickness, AQ, configjson["location"], configjson["number"])
             print('Upload log success!')
         except Exception as e:
             print(e, 'Someting went wrong.')

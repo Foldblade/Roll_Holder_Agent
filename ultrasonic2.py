@@ -25,18 +25,13 @@ f.close()
 # instead of physical pin numbers
 GPIO.setmode(GPIO.BCM)
 
-
-
 # Define GPIO to use on Pi
-
+GPIO_TRIGGER = configjson["GPIO"]["ultrasonic_TRIGGER2"]
+GPIO_ECHO = configjson["GPIO"]["ultrasonic_ECHO2"]
 
 # print("Ultrasonic Measurement")
 
-def measure(ID):
-    starttime = time.time()
-    ID = str(ID)
-    GPIO_TRIGGER = configjson["GPIO"]["ultrasonic_TRIGGER"+ID]
-    GPIO_ECHO = configjson["GPIO"]["ultrasonic_ECHO"+ID]
+def measure():
 
     # Set pins as output and input
     GPIO.setup(GPIO_TRIGGER,GPIO.OUT)  # Trigger
@@ -55,13 +50,9 @@ def measure(ID):
     start = time.time()
 
     while GPIO.input(GPIO_ECHO)==0:
-        if time.time() - starttime > 3:
-            return None
         start = time.time()
 
     while GPIO.input(GPIO_ECHO)==1:
-        if time.time() - starttime > 3:
-            return None
         stop = time.time()
 
     # Calculate pulse length
@@ -79,13 +70,7 @@ def measure(ID):
 
 if __name__ == '__main__': # 测试
     while True:
-        print("1\tdistance to paper\n2\tdryer\n3\tstepper")
-        ID = input("Which ultrasonic would you like to choose? :")
-        if ID == "":
-            ID = 1
-        else:
-            ID = int(ID)
-        print("Distance : ", measure(ID))
-        time.sleep(0.1)
+        print("Distance2 : ", measure())
+        time.sleep(2)
     # Reset GPIO settings
     GPIO.cleanup()

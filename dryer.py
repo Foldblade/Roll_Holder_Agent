@@ -5,19 +5,18 @@ import RPi.GPIO as GPIO
 import os
 import json
 import time
-
-# 继电器带着烘干机。原heating端口废弃。
+import ultrasonic
 
 where_script = os.path.split(os.path.realpath(__file__))[0]
 f = open(where_script + '/.config.json', 'r') # 在此文件内修改你的GPIO配置
 configjson = json.load(f)
 f.close()
 
-infrared2_channel = configjson["GPIO"]["infrared2"]
+time.sleep(3) # 开机后保险起见，等待3s
+
 relay_channel = configjson["GPIO"]["relay"]
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(infrared2_channel, GPIO.IN)
 GPIO.setup(relay_channel, GPIO.OUT)
 
 '''
@@ -26,9 +25,15 @@ GPIO.setup(relay_channel, GPIO.OUT)
 '''
 def dryer(name):
     while True:
-        input_state = GPIO.input(infrared2_channel)
-        if input_state == False:
-            print("[烘干机]\t红外对射有人-False")
+        newmeasure = ultrasonic.measure(2)
+        print(newmeasure)
+        if newmeasure > 15:
+            input_state = False
+        else :
+            input_state = True
+        
+        if input_state == True:
+            print("[烘干机]\t有人")
             GPIO.output(relay_channel, True)
             print("[烘干机]\t继电器置True")
             print("[烘干机]\ttime sleep 0.2")
@@ -36,10 +41,10 @@ def dryer(name):
             GPIO.output(relay_channel, False)
             print("[烘干机]\t继电器置False")
         else:
-            print("[烘干机]\t红外对射没人-True")
+            print("[烘干机]\t没人")
             GPIO.output(relay_channel, False)
             print("[烘干机]\t继电器置False")
-        time.sleep(1)
+        time.sleep(2)
 
 if __name__ == "__main__":
     time.sleep(10)

@@ -2,7 +2,7 @@
 
 [TOC]
 
-“纸盒特工”是我们为节能减排竞赛所做的小制作。升级自学长的毕业设计，原名智能纸盒，为竞赛改名“纸盒特工”。
+“纸盒特工”是我们为节能减排竞赛所做的小制作。升级自学长的毕业设计，原名智能纸盒，为竞赛改名“纸盒特工”->“绿色‘智’盒”
 
 [![996.ICU](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu) [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
 
@@ -19,10 +19,9 @@
 
 - Raspberry Pi ZERO W
 - 传感器
-    - 红外对射2组
     - 空气质量（MQ-135）
     - 温湿度（DHT11）
-    - 超声波
+    - 超声波（HC-SRO4）三个
 - 步进电机（出纸轴）
 - 电吹风改装的烘手机
 - [一路继电器模块 延时断电 断开 触发延时 循环定时电路开关](https://item.taobao.com/item.htm?id=556278257199)
@@ -127,14 +126,15 @@ nohup python3 buttonListener.py >/dev/null 2>&1 &
     "location": "教学楼一#101", // 所在地#卫生间门牌号
     "number": 1, // 编号（唯一）
     "GPIO": { // GPIO引脚使用
-        "infrared": 22, // 红外对射
-        "humiture": 17, // 温湿度（DHT11）
-        "airQuality": 27, // 空气质量（MQ-135）DO口
-        "ultrasonic_TRIGGER": 15, // 超声波Trigger口
-        "ultrasonic_ECHO": 14, // 超声波Echo口
-        "button": 19, // 按钮
-        "infrared2": 16, // 红外对射2
-        "relay": 20 // 继电器
+        "humiture": 17, // 温湿度
+        "airQuality": 27, // 空气质量
+        "ultrasonic_TRIGGER1": 15, // 超声波1 距离纸面distance to paper
+        "ultrasonic_ECHO1": 14, // 超声波1 距离纸面
+        "ultrasonic_TRIGGER2": 21, // 超声波2 烘手(风扇)dryer
+        "ultrasonic_ECHO2": 20, // 超声波2 烘手（风扇）
+        "ultrasonic_TRIGGER3": 16, // 超声波3 电机（出纸）stepper
+        "ultrasonic_ECHO3": 12, // 超声波3 电机（出纸）
+        "relay": 26 // 继电器
     }
 }
 ```

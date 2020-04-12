@@ -11,9 +11,9 @@ f = open(where_script + '/.sql_config.json', 'r') # 在此文件内修改你的�
 sqljson = json.load(f)
 f.close()
 
-def data_upload(temperature, humidness, thickness, smelly, location, number):
+def data_upload(thickness, smelly, location, number):
     '''data_upload：
-    1. 上传温度、湿度、剩余厚度、气味报警、地点与编号
+    1. 上传剩余厚度、气味报警、地点与编号
        若shuju表不存在该地点+编号的盒子，则Insert之；
        若shuju表已经有该地点+编号的盒子，则Update之。
     2. insert数据到log表。
@@ -32,6 +32,9 @@ def data_upload(temperature, humidness, thickness, smelly, location, number):
             data_upload(18, 55, 8.6, 1, '主五#320', 1)
         
     '''
+    thickness = str(thickness)
+    smelly = str(smelly)
+    number = str(number)
      
     # 打开数据库连接
     db = pymysql.connect(sqljson["host"], sqljson["user"], sqljson["password"], sqljson["database"] )
@@ -52,11 +55,9 @@ def data_upload(temperature, humidness, thickness, smelly, location, number):
         # 存在这台设备的记录
         # 注意下一行有写死了是shuju表
         sql = "UPDATE `shuju` SET" + \
-        " temperature=" + str(temperature) + "," \
-        " humidness=" + str(humidness) + "," \
         " thickness=" + str(thickness) + "," \
         " smelly=" + str(smelly) + \
-        " WHERE number=" + number + " AND location='" + location +"'" 
+        " WHERE number=" + str(number) + " AND location='" + location +"'" 
         # SQL语句。注意这里字符串前面的空格。
         try:
             # 执行sql语句
@@ -71,8 +72,8 @@ def data_upload(temperature, humidness, thickness, smelly, location, number):
         # 不存在这台设备的记录
         # SQL 插入语句
         # 注意下一行有写死了是shuju表
-        sql = "INSERT `shuju`(temperature, humidness, thickness, smelly, location, number) \
-        VALUES (" + temperature + ", " + humidness + ", " + thickness + ", " + smelly + ", \
+        sql = "INSERT `shuju`(thickness, smelly, location, number) \
+        VALUES (" + thickness + ", " + smelly + ", \
         '" + location + "', " + number + ")"
         try:
             # 执行sql语句
@@ -84,8 +85,8 @@ def data_upload(temperature, humidness, thickness, smelly, location, number):
             db.rollback()
     
     # 插入log表
-    sql = "INSERT `log`(temperature, humidness, thickness, smelly, location, number) \
-        VALUES (" + temperature + ", " + humidness + ", " + thickness + ", " + smelly + ", \
+    sql = "INSERT `log`(thickness, smelly, location, number) \
+        VALUES (" + thickness + ", " + smelly + ", \
         '" + location + "', " + number + ")"
     try:
         # 执行sql语句
@@ -124,7 +125,7 @@ def data_upload(temperature, humidness, thickness, smelly, location, number):
     # 关闭数据库连接
     db.close()
 
-def log_upload(temperature, humidness, smelly, location, number):
+def log_upload(smelly, location, number):
     '''log_upload：
     上传温度、湿度、气味报警、地点与编号到log表
     若数据库不存在该地点+编号的盒子，则Insert之；
@@ -141,8 +142,6 @@ def log_upload(temperature, humidness, smelly, location, number):
             data_upload(18, 55, 8.6, 1, '主五#320', 1)
         
     '''
-    temperature = str(temperature)
-    humidness = str(humidness)
     smelly = str(smelly)
     number = str(number)
     # 打开数据库连接
@@ -152,8 +151,8 @@ def log_upload(temperature, humidness, smelly, location, number):
     cursor = db.cursor()
 
     # 写死的log表
-    sql = "INSERT `log`(temperature, humidness, smelly, location, number) \
-    VALUES (" + temperature + ", " + humidness + ", " + smelly + ", \
+    sql = "INSERT `log`(smelly, location, number) \
+    VALUES (" + smelly + ", \
     '" + location + "', " + number + ")"
     try:
         # 执行sql语句
